@@ -24,6 +24,15 @@ class Mput
     private $_name;
     
     /**
+     * @see setCallback
+     * @see fireCallback
+     * @see getCallbacks
+     * @var array registered events
+     */
+    
+    private $_events = [];
+    
+    /**
      * Returns new instance of Mput
      * @return Mput instance
      */
@@ -53,6 +62,55 @@ class Mput
     public function getName ()
     {
         return $this->_name;
+    }
+    
+    /**
+     * Typical getter for _events
+     * 
+     * @return array {@see _events}
+     */
+    
+    public function getCallbacks ()
+    {
+        return $this->_events;
+    }
+    
+    /**
+     * 
+     * Overrides (or sets) given callback for specified event 
+     * 
+     * @param string $eventName event name
+     * @param \Closure $callback
+     */
+    
+    public function setCallback ($eventName, \Closure $callback)
+    {
+        $eventName = (string) $eventName;
+        
+        $this->_events [$eventName] = $callback;
+    }
+    
+    /**
+     * 
+     * Invokes specified callback
+     * 
+     * @param string $eventName event name
+     * @return mixed
+     * @throws UnexpectedValueException
+     */
+    
+    public function fireCallback ($eventName)
+    {
+        $callbacks = $this->getCallbacks ();
+        
+        if ( ! array_key_exists ($eventName, $callbacks) )
+        {
+            throw new UnexpectedValueException (
+                '$eventName is not found in $_events'
+            );
+        }
+        
+        return $callbacks [$eventName] ();
     }
 }
 

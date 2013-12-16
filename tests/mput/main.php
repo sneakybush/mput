@@ -32,6 +32,10 @@ class MputTest extends PHPUnit_Framework_TestCase
         );
     }
     
+    # some more tests here
+    
+    
+    
     public function tearDown ()
     {
         $this->mputInstance = null;
