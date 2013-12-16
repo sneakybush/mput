@@ -16,6 +16,13 @@
 
 class Mput
 {
+        
+    /**
+     * @var string Name of test suite
+     */
+    
+    private $_name;
+    
     /**
      * Returns new instance of Mput
      * @return Mput instance
@@ -27,12 +34,6 @@ class Mput
         $instance->setName ($name);
         return $instance;
     }
-    
-    /**
-     * @var string Name of test suite
-     */
-    
-    private $_name;
     
     /**
      * Sets $_name property
