@@ -81,11 +81,17 @@ class Mput
      * 
      * @param string $eventName event name
      * @param \Closure $callback
+     * @throws InvalidArgumentException
      */
     
-    public function setCallback ($eventName, \Closure $callback)
+    public function setCallback ($eventName, $callback)
     {
         $eventName = (string) $eventName;
+        
+        if ( ! ($callback instanceof Closure) )
+        {
+            throw new InvalidArgumentException ();
+        }
         
         $this->_events [$eventName] = $callback;
     }

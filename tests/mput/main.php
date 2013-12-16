@@ -32,9 +32,35 @@ class MputTest extends PHPUnit_Framework_TestCase
         );
     }
     
-    # some more tests here
+    public function testGetCallbacks ()
+    {
+        $this->assertEquals ($this->mputInstance->getCallbacks (), []);
+        
+        $this->mputInstance->setCallback ('test', function ($mput)
+        {
+            // nothing here
+        });
+        
+        $this->assertCount (1, $this->mputInstance->getCallbacks ());
+    }
     
+    /**
+     * @expectedException InvalidArgumentException
+     */
     
+    public function testSetCallback ()
+    {
+        $this->mputInstance->setCallback ('something', null);
+    }
+    
+    /**
+     * @expectedException UnexpectedValueException
+     */
+    
+    public function testFireCallback ()
+    {
+        $this->mputInstance->fireCallback ( uniqid () );
+    }
     
     public function tearDown ()
     {
