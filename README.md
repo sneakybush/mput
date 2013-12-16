@@ -1,11 +1,7 @@
+Micro PHP Unit Tester
+---------------------
+> Should I use __Stable__ & *community-powered* PHP testing libraries?  No! __NOT INVENTED HERE__
 
-   # Micro PHP Unit Tester #
-   ----
-   __Stable__ & *community-powered* PHP testing libraries?  Nope! __NOT INVENTED HERE__
-   
-   ----
-   + Heavily inspired by [Testify.php](github.com/marco-fiset/Testify.php)
-   + Licensed under __the MIT license__
-   + Not even created
-
-
++ Heavily inspired by [Testify.php](github.com/marco-fiset/Testify.php)
++ Licensed under __the MIT license__
++ Not even created
