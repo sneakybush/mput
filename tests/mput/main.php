@@ -23,6 +23,7 @@ class MputTest extends PHPUnit_Framework_TestCase
     public function setUp ()
     {
         $this->mputInstance = Mput::create ($this->testSuiteName);
+        $this->mputInstance->createTestCase ('__hidden__', function () {} );
     }
     
     public function tearDown ()
@@ -177,5 +178,44 @@ class MputTest extends PHPUnit_Framework_TestCase
             , [ 'foo' , true  , false ]
             , [ 'bar' , 'bar' , true  ]
         ];
+    }
+    
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    
+    public function testCreateTestCaseArgumentValidation ()
+    {
+        $this->mputInstance->createTestCase ('test', null);
+    }
+    
+    /**
+     * @expectedException LogicException
+     */
+    
+    public function testCreateTestCaseLogicValidation ()
+    {
+        $callback = function () {}; // new Closure
+        
+        // it's ok
+        $this->mputInstance->createTestCase ('test', $callback);
+        
+        // oh!
+        $this->mputInstance->createTestCase ('test', $callback);
+    }
+    
+    public function testGetTestCases ()
+    {
+        $this->mputInstance->createTestCase ('test', function () {} );
+        
+        // don't forget about __hidden__ the only purpose of which is to
+        // make the rest of tests work 
+        $this->assertCount (2, $this->mputInstance->getTestCases ());
+    }
+    
+    public function testGetLatestTestCase ()
+    {
+        $this->mputInstance->createTestCase ('test', function () {} );
+        $this->assertEquals ('test', $this->mputInstance->getLatestTestCase ());
     }
 }
