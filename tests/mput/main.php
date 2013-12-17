@@ -2,7 +2,8 @@
 
 /*
  * Mput main test file
- * 
+ * Licensed under the MIT license
+ * For more info please check the /LICENSE file
  *  
  */
 
@@ -36,7 +37,7 @@ class MputTest extends PHPUnit_Framework_TestCase
     {
         $this->assertEquals ($this->mputInstance->getCallbacks (), []);
         
-        $this->mputInstance->setCallback ('test', function ($mput)
+        $this->mputInstance->setCallback ('test', function ()
         {
             // nothing here
         });
@@ -48,18 +49,39 @@ class MputTest extends PHPUnit_Framework_TestCase
      * @expectedException InvalidArgumentException
      */
     
-    public function testSetCallback ()
+    public function testSetCallbackValidation ()
     {
         $this->mputInstance->setCallback ('something', null);
+    }
+    
+    public function testSetCallback ()
+    {
+        $this->mputInstance->setCallback ('test', function ()
+        {
+            return 42;
+        });
+        
+        $this->assertCount (1, $this->mputInstance->getCallbacks ());
+        $this->assertEquals (42, $this->mputInstance->fireCallback ('test'));
     }
     
     /**
      * @expectedException UnexpectedValueException
      */
     
-    public function testFireCallback ()
+    public function testFireCallbackValidation ()
     {
         $this->mputInstance->fireCallback ( uniqid () );
+    }
+    
+    public function testFireCallback ()
+    {
+        $this->mputInstance->setCallback ('test', function () 
+        {
+            return 42;
+        });
+        
+        $this->assertEquals (42, $this->mputInstance->fireCallback ('test'));
     }
     
     public function tearDown ()
