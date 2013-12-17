@@ -155,5 +155,33 @@ class Mput
     {
         return ! $this->assertEquals ($argument1, $argument2, $message);
     }
+    
+    /**
+     * Compares given value to true (non-strict)
+     * 
+     * @param mixed $argument
+     * @param string $message assertion message (MUST BE specified)
+     * @return comparison result
+     */
+    
+    public function assertTrue ($argument, $message)
+    {
+        return $this->assertEquals ($argument, true, $message);
+    }
+    
+    /**
+     * Compares given value to false (non-strict)
+     * 
+     * @param mixed $argument
+     * @param string $message assertion message (MUST BE specified)
+     * @return comparison result
+     */
+    
+    public function assertFalse ($argument, $message)
+    {
+        return $this->assertEquals ($argument, false, $message);
+    }
+    
+    
 }
 

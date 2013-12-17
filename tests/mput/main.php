@@ -118,4 +118,18 @@ class MputTest extends PHPUnit_Framework_TestCase
             , [ null , 0     , true ]
         ];
     }
+    
+    public function testAssertTrue ()
+    {
+        $this->assertTrue ($this->mputInstance->assertTrue (true, ''));
+        
+        $this->assertFalse ($this->mputInstance->assertTrue (false, ''));
+    }
+    
+    public function testAssertFalse ()
+    {
+        $this->assertFalse ($this->mputInstance->assertFalse (true, ''));
+        
+        $this->assertTrue ($this->mputInstance->assertFalse (false, ''));
+    }
 }
