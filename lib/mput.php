@@ -52,6 +52,13 @@ class Mput
     private $_testCases = [];
     
     /**
+     * @var some stuff you might want to store here during runtime
+     * @see data
+     */
+    
+    private $_data;
+    
+    /**
      * Returns new instance of Mput
      * @return Mput instance
      */
@@ -61,6 +68,25 @@ class Mput
         $instance = (new static);
         $instance->setName ($name);
         return $instance;
+    }
+    
+    /**
+     * The constructor
+     */
+    
+    public function __construct ()
+    {
+        $this->_data = new stdClass ();
+    }
+    
+    /**
+     * Returns the reference to the _data property
+     * @return stdClass data
+     */
+    
+    public function data ()
+    {
+        return $this->_data;
     }
     
     /**
