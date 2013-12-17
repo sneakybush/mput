@@ -118,5 +118,29 @@ class Mput
         
         return $callbacks [$eventName] ();
     }
+    
+    /* later on this one */
+    
+    protected function _saveAssertionResult ($result, $message)
+    {
+        
+    }
+    
+    /**
+     * Non-strict value comparing.
+     * 
+     * @param mixed $argument1 firt argument
+     * @param mixed $argument2 second argument
+     * @param string $message assertion message (MUST BE specified)
+     * @return bool comparison result
+     */
+    
+    public function assertEquals ($argument1, $argument2, $message)
+    {
+        // non-strict, worth your attention
+        $result = ($argument1 == $argument2); 
+        $this->_saveAssertionResult ($result, $message);
+        return $result; // purpose of testing
+    }
 }
 

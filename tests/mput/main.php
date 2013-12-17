@@ -25,6 +25,11 @@ class MputTest extends PHPUnit_Framework_TestCase
         $this->mputInstance = Mput::create ($this->testSuiteName);
     }
     
+    public function tearDown ()
+    {
+        $this->mputInstance = null;
+    }
+    
     public function testGetName ()
     {
         $this->assertEquals (
@@ -84,8 +89,23 @@ class MputTest extends PHPUnit_Framework_TestCase
         $this->assertEquals (42, $this->mputInstance->fireCallback ('test'));
     }
     
-    public function tearDown ()
+    /**
+     * @dataProvider assertEqualsProvider
+     */
+    
+    public function testAssertEquals ($argument1, $argument2, $result)
     {
-        $this->mputInstance = null;
+        // pass an empty string for the 3rd param in Mput::assertEquals
+        $this->assertEquals ($result, 
+                $this->mputInstance->assertEquals ($argument1, $argument2, ''));
+    }
+    
+    public function assertEqualsProvider ()
+    {
+        return [
+              [ ''   , null  , true ]
+            , [ 0    , false , true ]
+            , [ null , 0     , true ]
+        ];
     }
 }
