@@ -11,6 +11,7 @@ Micro PHP Unit Tester
 * `createTestCase ( string $name , \Closure $testCase )`
 * `setCallback ( string $eventName , \Closure $callback )`
 * `fireCallback ( string $eventName )`
+* `getCallbacks ( )`
 * `run ( )`
 * `assertEquals ( $argument1 , $argument2 , $message )`
  * `assertNotEquals ( $argument1 , $argument2 , $message )`
@@ -19,4 +20,4 @@ Micro PHP Unit Tester
 * `fail ( )`
 * `pass ( )`
 * `assertSame ( $argument1 , $argument2 , $message )`
- * `assertTheSame ( $argument1 , $argument2 , $message )`
+ * `assertNotSame ( $argument1 , $argument2 , $message )`
