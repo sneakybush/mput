@@ -6,18 +6,6 @@ Micro PHP Unit Tester
 + Licensed under __the MIT license__
 + Not even created
 
-# Public API
+# Documentation
 
-* `createTestCase ( string $name , \Closure $testCase )`
-* `setCallback ( string $eventName , \Closure $callback )`
-* `fireCallback ( string $eventName )`
-* `getCallbacks ( )`
-* `run ( )`
-* `assertEquals ( $argument1 , $argument2 , $message )`
- * `assertNotEquals ( $argument1 , $argument2 , $message )`
-* `assertTrue ( $argument , $message )`
-* `assertFalse ( $argument , $message )`
-* `fail ( )`
-* `pass ( )`
-* `assertSame ( $argument1 , $argument2 , $message )`
- * `assertNotSame ( $argument1 , $argument2 , $message )`
+> Soon...
