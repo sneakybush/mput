@@ -33,6 +33,25 @@ class Mput
     private $_events = [];
     
     /**
+     * @var all asserted values
+     * @see assert*
+     * @see fail
+     * @see pass
+     * @see _saveAssertionResult
+     * @see getAssertions
+     */
+    
+    private $_assertions = [];
+    
+    /**
+     * @var test cases related to this test suite
+     * @see createTestCase
+     * @see getTestCases
+     */
+    
+    private $_testCases = [];
+    
+    /**
      * Returns new instance of Mput
      * @return Mput instance
      */
@@ -119,11 +138,91 @@ class Mput
         return $callbacks [$eventName] ();
     }
     
-    /* later on this one */
+    /**
+     * Creates a new test case
+     * 
+     * @param string $name name of test case
+     * @param Closure $testCase test case itself
+     * @throws InvalidArgumentException
+     * @throws LogicException
+     */
     
-    protected function _saveAssertionResult ($result, $message)
+    public function createTestCase ($name, $testCase)
     {
+       $name = (string) $name; 
         
+       if ( ! ($testCase instanceof Closure) )
+       {
+           throw new InvalidArgumentException ();
+       }
+       
+       if ( array_key_exists ($name, $this->getTestCases ()) )
+       {
+           throw new LogicException ();
+       }
+        
+       $this->_testCases [$name] = $testCase; 
+    }
+    
+    /**
+     * Returns all created test cases (name => code wrapped in Closure)
+     * 
+     * @return array
+     */
+    
+    public function getTestCases ()
+    {
+        return $this->_testCases;
+    }
+    
+    /**
+     * 
+     * 
+     * @return string name of the latest test case
+     */
+    
+    public function getLatestTestCase ()
+    {
+        $allTestCaseNames = array_keys ($this->getTestCases ());
+        return end ($allTestCaseNames);        
+    }
+    
+    /**
+     * Saves given assertion data {@see _assertions}
+     * 
+     * @param boolean $result
+     * @param string $message assertion message (MUST BE specified!)
+     */
+    
+    private function _saveAssertionResult ($result, $message)
+    {
+        if ( ! is_bool ($result) )
+        {
+            throw new InvalidArgumentException ();
+        }
+        
+        $latestTestCase = $this->getLatestTestCase ();
+        
+        if ( ! $latestTestCase )
+        {
+            throw new LogicException ();
+        }
+        
+        $this->_assertions [$latestTestCase][] = [
+            'result'  => $result  ,
+            'message' => $message
+        ];
+    }
+    
+    /**
+     * Returns all asserted values grouped by testCase
+     * 
+     * @return array
+     */
+    
+    public function getAssertions ()
+    {
+        return $this->_assertions;
     }
     
     /**
