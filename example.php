@@ -11,6 +11,10 @@ require_once __DIR__ . '/lib/mput.php';
 
 $tester = Mput::create ('Sample Test Suite');
 
+$tester->setCallback ('test_case.before', function ($tester)
+{
+    $tester->data ()->info = 'foobar';
+});
 
 $tester->createTestCase ('First Test Case', function ($tester)
 {
