@@ -142,5 +142,18 @@ class Mput
         $this->_saveAssertionResult ($result, $message);
         return $result; // purpose of testing
     }
+    
+    /**
+     * 
+     * Like assertEquals, but vise versa
+     * @see assertEquals
+     * @return bool !assertEquals
+     * 
+     */
+    
+    public function assertNotEquals ($argument1, $argument2, $message)
+    {
+        return ! $this->assertEquals ($argument1, $argument2, $message);
+    }
 }
 

@@ -100,6 +100,16 @@ class MputTest extends PHPUnit_Framework_TestCase
                 $this->mputInstance->assertEquals ($argument1, $argument2, ''));
     }
     
+    /**
+     * @dataProvider assertEqualsProvider
+     */
+    
+    public function testAssertNotEquals ($argument1, $argument2, $result)
+    {
+        $this->assertEquals (!$result, 
+                $this->mputInstance->assertNotEquals ($argument1, $argument2, ''));
+    }
+    
     public function assertEqualsProvider ()
     {
         return [
