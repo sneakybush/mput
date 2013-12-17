@@ -250,4 +250,16 @@ class MputTest extends PHPUnit_Framework_TestCase
         $this->assertEquals ($output, $this->mputInstance->getAssertions ());
     }
     
+    public function testData ()
+    {
+        $this->mputInstance->data ()->foo = 'bar';      
+        
+        $this->assertEquals ('bar', $this->mputInstance->data ()->foo);
+    }
+    
+    public function testRun ()
+    {
+        // TODO: implement
+    }
+    
 } // MputTest
