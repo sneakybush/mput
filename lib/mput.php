@@ -182,6 +182,30 @@ class Mput
         return $this->assertEquals ($argument, false, $message);
     }
     
+    /**
+     * Will always fail
+     * 
+     * @param string $message assertion message (MUST BE specified)
+     * @return boolean false
+     */
     
+    public function fail ($message)
+    {
+        $this->_saveAssertionResult (false, $message);
+        return false;
+    }
+    
+    /**
+     * Will always pass
+     * 
+     * @param string $message assertion message (MUST BE specified)
+     * @return boolean true
+     */
+    
+    public function pass ($message)
+    {
+        $this->_saveAssertionResult (true, $message);
+        return true;
+    }
 }
 

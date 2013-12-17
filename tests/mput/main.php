@@ -132,4 +132,19 @@ class MputTest extends PHPUnit_Framework_TestCase
         
         $this->assertTrue ($this->mputInstance->assertFalse (false, ''));
     }
+    
+    // next 2 tests don't make any sense
+    // but hey
+    // what they always tell you?
+    // "always test all your code"
+    
+    public function testFail ()
+    {
+        $this->assertFalse ($this->mputInstance->fail (''));
+    }
+    
+    public function testPass ()
+    {
+        $this->assertTrue ($this->mputInstance->pass (''));
+    }
 }
