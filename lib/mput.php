@@ -207,5 +207,35 @@ class Mput
         $this->_saveAssertionResult (true, $message);
         return true;
     }
+    
+    /**
+     * STRICT values comparing.
+     * 
+     * @param mixed $argument1 firt argument
+     * @param mixed $argument2 second argument
+     * @param string $message assertion message (MUST BE specified)
+     * @return bool comparison result
+     */
+    
+    public function assertSame ($argument1, $argument2, $message)
+    {
+        $result = ($argument1 === $argument2);
+        $this->_saveAssertionResult ($result, $message);
+        return $result;
+    }
+    
+    /**
+     * 
+     * Like assertSame, but vise versa
+     * @see assertSame
+     * @return bool !assertSame
+     * 
+     */
+    
+    public function assertNotSame ($argument1, $argument2, $message)
+    {
+        return ! $this->assertSame ($argument1, $argument2, $message);
+    }
+    
 }
 

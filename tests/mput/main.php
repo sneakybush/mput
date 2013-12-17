@@ -147,4 +147,35 @@ class MputTest extends PHPUnit_Framework_TestCase
     {
         $this->assertTrue ($this->mputInstance->pass (''));
     }
+    
+    /**
+     * @dataProvider assertSameProvider
+     */
+    
+    public function testAssertSame ($argument1, $argument2, $result)
+    {
+        $this->assertEquals ($result,
+            $this->mputInstance->assertSame ($argument1, $argument2, '')
+        );
+    }
+    
+    /**
+     * @dataProvider assertSameProvider
+     */
+    
+    public function testAssertNotSame ($argument1, $argument2, $result)
+    {
+        $this->assertEquals (!$result,
+            $this->mputInstance->assertNotSame ($argument1, $argument2, '')
+        );
+    }
+    
+    public function assertSameProvider ()
+    {
+        return [
+              [ 0     , null  , false ]
+            , [ 'foo' , true  , false ]
+            , [ 'bar' , 'bar' , true  ]
+        ];
+    }
 }
