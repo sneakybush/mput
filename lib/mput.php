@@ -336,5 +336,14 @@ class Mput
         return ! $this->assertSame ($argument1, $argument2, $message);
     }
     
-}
+    /**
+     * Makes everything work magically
+     */
+    
+    public function run ()
+    {
+        
+    }
+    
+} // end Mput
 

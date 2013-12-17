@@ -218,4 +218,36 @@ class MputTest extends PHPUnit_Framework_TestCase
         $this->mputInstance->createTestCase ('test', function () {} );
         $this->assertEquals ('test', $this->mputInstance->getLatestTestCase ());
     }
-}
+    
+    // probably this one is the most difficult to read & understand
+    // attention, please
+    
+    public function testGetAssertions ()
+    {
+        $this->mputInstance->createTestCase ('test', function () {} );
+        
+        $this->mputInstance->assertTrue (false, 'foo');
+        $this->mputInstance->assertSame (42, 42, 'bar');
+        
+        // the ouput should be
+        $output = 
+        [
+            'test' => 
+            [
+                [
+                    'result'  => false,
+                    'message' => 'foo'
+                ],
+                
+                [
+                    'result'  => true,
+                    'message' => 'bar'
+                ]
+            ]
+        ];
+        
+        // so let's check
+        $this->assertEquals ($output, $this->mputInstance->getAssertions ());
+    }
+    
+} // MputTest
