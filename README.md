@@ -41,9 +41,16 @@ Use __callbacks__ system to do some work __before/after each case/suite__
 $mput->setCallback (Mput::TEST_CASE_BEFORE, function ($mput)
 {
     // everything stored in data() will be available across all your test cases
-    $mput->data ()->calculator = new Calculator ();
+    $mput->data ()->info = 'cats';
 });
 ~~~
+
+### All constants available
+
++ `Mput::TEST_SUITE_BEFORE`
++ `Mput::TEST_SUITE_AFTER`
++ `Mput::TEST_CASE_BEFORE`
++ `Mput::TEST_CASE_AFTER`
 
 Declare your test cases
 
@@ -61,6 +68,17 @@ $mput->assertFalse (true, 'I broke it!');
 $mput->assertEquals ($mput->data ()->info, 'foobar', 'Comparing two strings');
 $mput->fail ('Love doing everything wrong');
 ~~~
+
+### All available methods
+
++ `assertTrue ($arg, $msg)`
++ `assertFalse ($arg, $msg)`
++ `fail ($msg)`
++ `pass ($msg)`
++ `assertEquals ($arg1, $arg2, $msg)`
++ `assertNotEquals ($arg1, $arg2, $msg)`
++ `assertSame ($arg1, $arg2, $msg)`
++ `assertNotSame ($arg1, $arg2, $msg)`
 
 Make it work!
 
