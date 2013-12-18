@@ -163,9 +163,7 @@ class Mput
         
         if ( ! array_key_exists ($eventName, $callbacks) )
         {
-            throw new UnexpectedValueException (
-                '$eventName is not found in $_events'
-            );
+            throw new UnexpectedValueException ();
         }
         
         return $callbacks [$eventName] ();
@@ -308,7 +306,9 @@ class Mput
     
     public function assertNotEquals ($argument1, $argument2, $message)
     {
-        return ! $this->assertEquals ($argument1, $argument2, $message);
+        $result = ($argument1 != $argument2);
+        $this->_saveAssertionResult ($result, $message);
+        return $result;
     }
     
     /**
@@ -389,7 +389,9 @@ class Mput
     
     public function assertNotSame ($argument1, $argument2, $message)
     {
-        return ! $this->assertSame ($argument1, $argument2, $message);
+        $result = ($argument1 !== $argument2);
+        $this->_saveAssertionResult ($result, $message);
+        return $result;
     }
     
     /**
