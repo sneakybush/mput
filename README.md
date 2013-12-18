@@ -14,7 +14,7 @@ Micro PHP Unit Tester
 ilya@dev:/mput/root/dir$ phpunit 
 PHPUnit 3.7.28 by Sebastian Bergmann.
 
-Configuration read from /var/www/phpunit.xml.dist
+Configuration read from /mput/root/dir/phpunit.xml.dist
 
 ..............................
 
