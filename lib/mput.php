@@ -66,6 +66,17 @@ class Mput
     private $_data;
     
     /**
+     * @see setCallback
+     * @see fireCallback
+     * @see getCallbacks
+     */
+    
+    const TEST_SUITE_BEFORE = 'test_suite.before' ;    
+    const TEST_SUITE_AFTER  = 'test_suite.after'  ;
+    const TEST_CASE_BEFORE  = 'test_case.before'  ;    
+    const TEST_CASE_AFTER   = 'test_case.after'   ;
+
+    /**
      * Returns new instance of Mput
      * @return Mput instance
      */
@@ -161,12 +172,10 @@ class Mput
     {
         $callbacks = $this->getCallbacks ();
         
-        if ( ! array_key_exists ($eventName, $callbacks) )
+        if ( array_key_exists ($eventName, $callbacks) )
         {
-            throw new UnexpectedValueException ();
-        }
-        
-        return $callbacks [$eventName] ();
+            return $callbacks [$eventName] ($this);
+        }               
     }
     
     /**
@@ -399,12 +408,20 @@ class Mput
      */
     
     public function run ()
-    {                
+    {  
+        $this->fireCallback (self::TEST_SUITE_BEFORE);
+        
         foreach ($this->getTestCases () as $name => $testCase)
         {
+            $this->fireCallback (self::TEST_CASE_BEFORE);
+            
             $this->_switchTestCase ($name);
             $testCase ($this);
+            
+            $this->fireCallback (self::TEST_CASE_AFTER);
         }
+        
+        $this->fireCallback (self::TEST_SUITE_AFTER);
         
         // I want to override $this
         $isolation = function ($structure)

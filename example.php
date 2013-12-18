@@ -11,7 +11,7 @@ require_once __DIR__ . '/lib/mput.php';
 
 $tester = Mput::create ('Sample Test Suite');
 
-$tester->setCallback ('test_case.before', function ($tester)
+$tester->setCallback (Mput::TEST_CASE_BEFORE, function ($tester)
 {
     $tester->data ()->info = 'foobar';
 });
@@ -20,7 +20,7 @@ $tester->createTestCase ('First Test Case', function ($tester)
 {
     // everything here will pass (just an example)
     
-    $tester->assertEquals ('true', true, 'passed');
+    $tester->assertEquals ($tester->data ()->info, 'foobar', 'passed');
     
     $tester->assertSame (42, 42, 'passed');
     
