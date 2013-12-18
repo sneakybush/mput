@@ -6,11 +6,11 @@ Micro PHP Unit Tester
 + Licensed under __the MIT license__
 
 # Installation
---------------
+
 + Get it 
 + Make sure everything is OK - run tests using __PHPUnit__
 
-~~~ 
+~~~shell 
 ilya@dev:/mput/root/dir$ phpunit 
 PHPUnit 3.7.28 by Sebastian Bergmann.
 
@@ -28,4 +28,9 @@ Tests are placed in __tests/mput__ directory
 + **Now you're ready to write some code!**
 
 # Write your first test suite
------------------------------
+Add Mput to __your project__
+
+~~~php
+include __DIR__ . '/lib/mput.php'; 
+~~~
+
