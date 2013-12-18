@@ -51,6 +51,13 @@ class Mput
     
     private $_testCases = [];
     
+    /** 
+     * @var string 
+     * @see _switchTestCase 
+     */
+    
+    private $_latestTestCase;
+    
     /**
      * @var some stuff you might want to store here during runtime
      * @see data
@@ -202,15 +209,38 @@ class Mput
     }
     
     /**
+     * Returns the latest test case selected using _switchTestCase
      * 
-     * 
+     * @see _switchTestCase
      * @return string name of the latest test case
      */
     
     public function getLatestTestCase ()
     {
-        $allTestCaseNames = array_keys ($this->getTestCases ());
-        return end ($allTestCaseNames);        
+        if ( ! $this->_latestTestCase )
+        {
+            throw new LogicException ();
+        }
+        
+        return $this->_latestTestCase;
+    }
+    
+    /**
+     * Public but not a part of API
+     * 
+     * @param string $testCaseName name
+     */
+    
+    public function _switchTestCase ($testCaseName)
+    {
+        $testCaseName = (string) $testCaseName;
+        
+        if ( ! array_key_exists ($testCaseName, $this->getTestCases ()) )
+        {
+            throw new LogicException ();
+        }
+        
+        $this->_latestTestCase = $testCaseName;
     }
     
     /**
@@ -367,8 +397,20 @@ class Mput
      */
     
     public function run ()
-    {
-        // TODO: implement
+    {                
+        foreach ($this->getTestCases () as $name => $testCase)
+        {
+            $this->_switchTestCase ($name);
+            $testCase ($this);
+        }
+        
+        // I want to override $this
+        $isolation = function ($structure)
+        {
+            require_once __DIR__ . '/views/main.php';
+        };
+        
+        $isolation ($this->getAssertions ());
     }
     
 } // end Mput

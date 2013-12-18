@@ -24,6 +24,7 @@ class MputTest extends PHPUnit_Framework_TestCase
     {
         $this->mputInstance = Mput::create ($this->testSuiteName);
         $this->mputInstance->createTestCase ('__hidden__', function () {} );
+        $this->mputInstance->_switchTestCase ('__hidden__');
     }
     
     public function tearDown ()
@@ -216,6 +217,7 @@ class MputTest extends PHPUnit_Framework_TestCase
     public function testGetLatestTestCase ()
     {
         $this->mputInstance->createTestCase ('test', function () {} );
+        $this->mputInstance->_switchTestCase ('test');
         $this->assertEquals ('test', $this->mputInstance->getLatestTestCase ());
     }
     
@@ -225,6 +227,7 @@ class MputTest extends PHPUnit_Framework_TestCase
     public function testGetAssertions ()
     {
         $this->mputInstance->createTestCase ('test', function () {} );
+        $this->mputInstance->_switchTestCase ('test');
         
         $this->mputInstance->assertTrue (false, 'foo');
         $this->mputInstance->assertSame (42, 42, 'bar');
@@ -255,6 +258,15 @@ class MputTest extends PHPUnit_Framework_TestCase
         $this->mputInstance->data ()->foo = 'bar';      
         
         $this->assertEquals ('bar', $this->mputInstance->data ()->foo);
+    }
+    
+    /**
+     * @expectedException LogicException
+     */
+    
+    public function testSwitchTestCase ()
+    {
+        $this->mputInstance->_switchTestCase ( uniqid () );
     }
     
     public function testRun ()

@@ -33,7 +33,7 @@ $tester->createTestCase ('Second Test Suite', function ($tester)
 {
     // everything here will fail (just an example)
     
-    $tester->assertNotEquals ('false', true, 'failed');
+    $tester->assertNotEquals (true, true, 'failed');
     
     $tester->assertNotSame (42, 42, 'failed');
     
