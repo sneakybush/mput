@@ -29,7 +29,7 @@ $tester->createTestCase ('First Test Case', function ($tester)
     $tester->pass ('passed');
 });
 
-$tester->createTestCase ('Second Test Suite', function ($tester)
+$tester->createTestCase ('Second Test Case', function ($tester)
 {
     // everything here will fail (just an example)
     
