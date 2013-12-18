@@ -5,42 +5,39 @@ error_reporting (-1); // displays all errors possible
 // this shouldn't be done this way but it's just an example
 ini_set ('display_errors', true); 
 
-// DIRECTORY_SEPARATOR should be used
-// but it's beyond this example...
 require_once __DIR__ . '/lib/mput.php'; 
 
-$tester = Mput::create ('Sample Test Suite');
+require_once __DIR__ . '/example/calculator.php';
+
+// -----------------------------------------------------------------------
+
+$tester = Mput::create ('Calculator Test Suite');
 
 $tester->setCallback (Mput::TEST_CASE_BEFORE, function ($tester)
 {
-    $tester->data ()->info = 'foobar';
+    $tester->data ()->calculator = new Calculator ();
 });
 
-$tester->createTestCase ('First Test Case', function ($tester)
+$tester->createTestCase ('Testing add ()', function ($tester)
 {
-    // everything here will pass (just an example)
-    
-    $tester->assertEquals ($tester->data ()->info, 'foobar', 'passed');
-    
-    $tester->assertSame (42, 42, 'passed');
-    
-    $tester->assertTrue (true, 'passed');
-    
-    $tester->pass ('passed');
+
 });
 
-$tester->createTestCase ('Second Test Case', function ($tester)
+$tester->createTestCase ('Testing subtract ()', function ($tester)
 {
-    // everything here will fail (just an example)
-    
-    $tester->assertNotEquals (true, true, 'failed');
-    
-    $tester->assertNotSame (42, 42, 'failed');
-    
-    $tester->assertFalse (true, 'failed');
-    
-    $tester->fail ('failed');
+
 });
 
+$tester->createTestCase ('Testing divide ()', function ($tester)
+{
+    
+});
+
+$tester->createTestCase ('Testing multiply ()', function ($tester)
+{
+    
+});
+
+// -------------------------------------------------------------------------
 
 $tester->run ();
