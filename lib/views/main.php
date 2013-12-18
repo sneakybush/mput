@@ -13,8 +13,6 @@
             
             .mput-tests {
                 list-style-type: none;
-                margin: 0;
-                padding: 0;
             }
             
             .mput-test {
@@ -32,12 +30,12 @@
     </head>
     <body>
         <div class="container">
-            <div class="col-md-12 well">
+            <div class="col-md-6 col-md-offset-3 well">
                 <h1 class="text-center"><?php echo $suiteName; ?></h1>
                 <hr>
                 <?php foreach ($structure as $name => $tests): ?>
                 <div>
-                    <h3><?php echo $name; ?></h3>
+                    <h3 class="text-center"><?php echo $name; ?></h3>
                     <hr>
                     <ul class="mput-tests">
                     <?php foreach ($tests as $test): ?>
