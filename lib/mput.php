@@ -175,7 +175,9 @@ class Mput
         if ( array_key_exists ($eventName, $callbacks) )
         {
             return $callbacks [$eventName] ($this);
-        }               
+        }              
+        
+        return null; // make it obvious
     }
     
     /**

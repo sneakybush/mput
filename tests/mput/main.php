@@ -70,15 +70,13 @@ class MputTest extends PHPUnit_Framework_TestCase
         
         $this->assertCount (1, $this->mputInstance->getCallbacks ());
         $this->assertEquals (42, $this->mputInstance->fireCallback ('test'));
-    }
-    
-    /**
-     * @expectedException UnexpectedValueException
-     */
+    }    
     
     public function testFireCallbackValidation ()
     {
-        $this->mputInstance->fireCallback ( uniqid () );
+        $result = $this->mputInstance->fireCallback ( uniqid () );
+        
+        $this->assertEquals ($result, null);
     }
     
     public function testFireCallback ()
