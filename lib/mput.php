@@ -426,12 +426,12 @@ class Mput
         $this->fireCallback (self::TEST_SUITE_AFTER);
         
         // I want to override $this
-        $isolation = function ($structure)
+        $isolation = function ($structure, $suiteName)
         {
             require_once __DIR__ . '/views/main.php';
         };
         
-        $isolation ($this->getAssertions ());
+        $isolation ($this->getAssertions (), $this->getName ());
     }
     
 } // end Mput
