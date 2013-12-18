@@ -31,6 +31,41 @@ Tests are placed in __tests/mput__ directory
 Add Mput to __your project__
 
 ~~~php
-include __DIR__ . '/lib/mput.php'; 
+include __DIR__ . '/lib/mput.php';
+$mput = Mput::create ('Sample Suite');
 ~~~
+
+Use __callbacks__ system to do some work __before/after each case/suite__
+
+~~~php
+$mput->setCallback (Mput::TEST_CASE_BEFORE, function ($mput)
+{
+    // everything stored in data() will be available across all your test cases
+    $mput->data ()->calculator = new Calculator ();
+});
+~~~
+
+Declare your test cases
+
+~~~php
+$mput->createTestCase ('Testing something', function ($mput)
+{
+    // test something here
+});
+~~~
+
+Add some __tests__
+
+~~~php
+$mput->assertFalse (true, 'I broke it!');
+$mput->assertEquals ($mput->data ()->info, 'foobar', 'Comparing two strings');
+$mput->fail ('Love doing everything wrong');
+~~~
+
+Make it work!
+
+~~~php
+$mput->run ();
+~~~
+
 
