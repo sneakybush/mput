@@ -1,6 +1,7 @@
 Micro PHP Unit Tester
 ---------------------
-> Should I use __Stable__ & *community-powered* PHP testing libraries?  No! __NOT INVENTED HERE__
+__NOT INVENTED HERE__
+
 
 + Heavily inspired by [Testify.php](https://github.com/marco-fiset/Testify.php)
 + Licensed under __the MIT license__
@@ -8,34 +9,17 @@ Micro PHP Unit Tester
 # Installation
 
 + Get it 
-+ Make sure everything is OK - run tests using __PHPUnit__
-
-~~~shell 
-ilya@dev:/mput/root/dir$ phpunit 
-PHPUnit 3.7.28 by Sebastian Bergmann.
-
-Configuration read from /mput/root/dir/phpunit.xml.dist
-
-..............................
-
-Time: 29 ms, Memory: 3.00Mb
-
-OK (30 tests, 33 assertions)
-~~~
-Tests are placed in __tests/mput__ directory
-
-+ Check out __example.php__ for more info on how Mput works
-+ **Now you're ready to write some code!**
++ Add it to your project
 
 # Write your first test suite
-Add Mput to __your project__
+Add Mput to __your project__.
 
 ~~~php
 include __DIR__ . '/lib/mput.php';
 $mput = Mput::create ('Sample Suite');
 ~~~
 
-Use __callbacks__ system to do some work __before/after each case/suite__
+Use __callbacks__ system to do some work __before/after each case/suite__ if needed.
 
 ~~~php
 $mput->setCallback (Mput::TEST_CASE_BEFORE, function ($mput)
@@ -45,14 +29,14 @@ $mput->setCallback (Mput::TEST_CASE_BEFORE, function ($mput)
 });
 ~~~
 
-### All constants available
+## All constants available
 
 + `Mput::TEST_SUITE_BEFORE`
 + `Mput::TEST_SUITE_AFTER`
 + `Mput::TEST_CASE_BEFORE`
 + `Mput::TEST_CASE_AFTER`
 
-Declare your test cases
+Declare your test cases.
 
 ~~~php
 $mput->createTestCase ('Testing something', function ($mput)
@@ -61,7 +45,7 @@ $mput->createTestCase ('Testing something', function ($mput)
 });
 ~~~
 
-Add some __tests__
+Add some __tests__.
 
 ~~~php
 $mput->assertFalse (true, 'I broke it!');
@@ -69,7 +53,7 @@ $mput->assertEquals ($mput->data ()->info, 'foobar', 'Comparing two strings');
 $mput->fail ('Love doing everything wrong');
 ~~~
 
-### All available methods
+## All available methods
 
 + `assertTrue ($arg, $msg)`
 + `assertFalse ($arg, $msg)`
